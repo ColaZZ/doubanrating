@@ -1,19 +1,35 @@
-// pages/search/search.js
+var URL="https://api.douban.com/v2/movie/search";
 Page({
-  data:{},
-  onLoad:function(options){
-    // 页面初始化 options为页面跳转所带来的参数
+  data:{
+      movies:[]
   },
-  onReady:function(){
-    // 页面渲染完成
+  onLoad:function(){
+      console.log("onLoad search..........");
   },
-  onShow:function(){
-    // 页面显示
-  },
-  onHide:function(){
-    // 页面隐藏
-  },
-  onUnload:function(){
-    // 页面关闭
+  search:function(event){
+      if(!event.detail.value){
+          return;
+      }
+      wx.showToast({
+          title:"加载中..",
+          icon:"loading",
+          duration:10000
+      });
+      var that=this;
+      wx.request({
+        url: URL+"?q="+event.detail.value,
+        data: {},
+        method: 'GET', 
+        header: {
+            "content-type":"Application/json"
+        }, 
+        success: function(res){
+          console.log(res.data);
+          wx.hideToast();
+          that.setData({
+              movies:res.data.subjects
+          });
+        }
+      })
   }
 })

@@ -1,19 +1,17 @@
-// pages/profile/profile.js
+var app = getApp()
 Page({
-  data:{},
-  onLoad:function(options){
-    // é¡µé¢åˆå§‹åŒ– optionsä¸ºé¡µé¢è·³è½¬æ‰€å¸¦æ¥çš„å‚æ•°
+  data: {
+    userInfo: {}
   },
-  onReady:function(){
-    // é¡µé¢æ¸²æŸ“å®Œæˆ
-  },
-  onShow:function(){
-    // é¡µé¢æ˜¾ç¤º
-  },
-  onHide:function(){
-    // é¡µé¢éšè—
-  },
-  onUnload:function(){
-    // é¡µé¢å…³é—­
+  onLoad: function () {
+    console.log('onLoad')
+    var that = this
+    //µ÷ÓÃÓ¦ÓÃÊµÀıµÄ·½·¨»ñÈ¡È«¾ÖÊı¾İ
+    app.getUserInfo(function(userInfo){
+      //¸üĞÂÊı¾İ
+      that.setData({
+        userInfo:userInfo
+      })
+    })
   }
 })
